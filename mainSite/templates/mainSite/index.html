@@ -2,7 +2,14 @@
 {% extends 'mainSite/base.html' %}
 
 {% block content %}
-	
-	Index Page
+ 
+  <form method ='post' action = "{% url 'upload' %}" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <input type="file" name="document">
+    <button type="submit">Upload</button>
+
+  </form>
+
 
 {% endblock %}
