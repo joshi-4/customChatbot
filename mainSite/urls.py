@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', views.logout, name= 'logout'),
     path('register/', views.register, name= 'register'),
     path('upload/', views.upload, name= 'upload'),
+    path('download/', views.download_apk, name= 'download')
 ]

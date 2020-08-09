@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+import mimetypes
+import os
 
 # Create your views here.
 @login_required
@@ -46,7 +48,18 @@ def upload(request):
         elif uploaded_file.content_type == 'application/pdf':
             print("Pdf")
         else:
-            print("Doecument Type Not Supported")
+            print("Document Type Not Supported")
         
     
     return render(request, 'mainsite/index.html')
+
+
+def download_apk(request):
+    filepath = 'mainSite/chatbot/bin/temp.txt'
+    filename = "temp.txt"
+    #filename = "temp.txt"
+    fl = open(filepath, 'rb')
+    mime_type, _ = mimetypes.guess_type(filepath)
+    response = HttpResponse(fl, content_type = mime_type)
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    return response
